@@ -4,7 +4,7 @@ import type { Project } from "@/components/site/project-card";
 
 export const navLinks = [
   { href: "/work", label: "Work" },
-  { href: "/#about", label: "About" },
+  { href: "/about", label: "About" },
   { href: "/#writing", label: "Writing" },
 ] as const;
 
@@ -69,5 +69,23 @@ export const capabilities: Capability[] = [
   {
     title: "SCALE",
     description: "Cloud and infrastructure that stay dependable as things grow.",
+  },
+];
+
+export const approaches: Capability[] = [
+  {
+    title: "Product engineering",
+    description: "Building practical experiences that solve the right problem.",
+    mobileDescription: "Practical experiences that solve the right problem.",
+  },
+  {
+    title: "Automation & DevOps",
+    description: "Turning complex workflows into reliable, repeatable systems.",
+    mobileDescription: "Reliable workflows that give teams more room to focus.",
+  },
+  {
+    title: "Cloud infrastructure",
+    description: "Creating foundations ready for the next stage of growth.",
+    mobileDescription: "Foundations ready for the next stage of growth.",
   },
 ];

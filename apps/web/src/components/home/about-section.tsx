@@ -40,9 +40,8 @@ export function AboutSection() {
         </Reveal>
       </div>
 
-      {/* TODO: point at the about page once that route exists. */}
       <Reveal delay={340} className="lg:hidden">
-        <ActionLink href="/#about" variant="text" size="none" className="text-[14px] text-brand">
+        <ActionLink href="/about" variant="text" size="none" className="text-[14px] text-brand">
           More about me ↗
         </ActionLink>
       </Reveal>

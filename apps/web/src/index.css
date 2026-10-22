@@ -26,6 +26,7 @@
 
 @theme {
   --animate-nudge: nudge 1.8s ease-in-out infinite;
+  --animate-scan: scan 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
 
   @keyframes nudge {
     0%,
@@ -34,6 +35,15 @@
     }
     50% {
       transform: translateY(3px);
+    }
+  }
+
+  @keyframes scan {
+    from {
+      transform: translateY(-100%);
+    }
+    to {
+      transform: translateY(300%);
     }
   }
 }
