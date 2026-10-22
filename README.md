@@ -1,131 +1,68 @@
-# reynad-v3
+# reynadi.id
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines React, TanStack Start, Self, and more.
+The source for Reynadi Andreas Priesley's personal portfolio. It introduces his work as a software engineer, showcases product concepts and experience, explains his approach to building software, and collects short writing previews about engineering, automation, and cloud infrastructure.
 
-## Features
+The site has four pages:
 
-- **TypeScript** - For type safety and improved developer experience
-- **TanStack Start** - SSR framework with TanStack Router
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **Shared UI package** - shadcn/ui primitives live in `packages/ui`
-- **Drizzle** - TypeScript-first ORM
-- **PostgreSQL** - Database engine
-- **Turborepo** - Optimized monorepo build system
-- **Oxlint** - Oxlint + Oxfmt (linting & formatting)
+- **Home (`/`)** — introduction, experience, selected work, writing previews, and contact.
+- **Work (`/work`)** — experience and three product concepts: Orbit, Fieldnote, and Relay.
+- **About (`/about`)** — Reynadi's story and approach to product engineering, automation, and infrastructure.
+- **Writing (`/writing`)** — article previews and topics. Full article pages are not implemented yet.
 
-## Getting Started
+## Stack
 
-First, install the dependencies:
+This is a Bun and Turborepo monorepo. The web app uses React 19, TanStack Start and Router, Vite, Tailwind CSS, and shared shadcn-style UI components. The server uses Nitro and evlog. A PostgreSQL and Drizzle package is included for database access; the current portfolio content is defined in code.
+
+## Run locally
+
+You'll need Bun 1.4.3 and PostgreSQL. Docker Compose can start the included development database.
 
 ```bash
 bun install
+bun run db:start
 ```
 
-## Database Setup
+Create `apps/web/.env` with a connection string for your PostgreSQL instance. For the included Docker Compose database:
 
-This project uses PostgreSQL with Drizzle ORM.
-
-1. Make sure you have a PostgreSQL database set up.
-2. Update your `apps/web/.env` file with your PostgreSQL connection details.
-
-3. Apply the schema to your database:
-
-```bash
-bun run db:push
+```dotenv
+DATABASE_URL=postgresql://postgres:password@localhost:5432/reynad-v3
 ```
 
-Then, run the development server:
+Then start the site:
 
 ```bash
 bun run dev
 ```
 
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the fullstack application.
+Open [http://localhost:3001](http://localhost:3001). If you already have PostgreSQL, use your own connection string and skip `bun run db:start`.
 
-## UI Customization
+The environment schema is in `apps/web/.env.schema`. `bun install` generates its typed environment accessor; run `bun run env:generate` after editing an environment schema.
 
-React web apps in this stack share shadcn/ui primitives through `packages/ui`.
+## Repository layout
 
-- Change design tokens and global styles in `packages/ui/src/styles/globals.css`
-- Update shared primitives in `packages/ui/src/components/*`
-- Adjust shadcn aliases or style config in `packages/ui/components.json` and `apps/web/components.json`
+| Path              | Purpose                                                                |
+| ----------------- | ---------------------------------------------------------------------- |
+| `apps/web`        | Portfolio routes, content, components, assets, and server setup        |
+| `packages/ui`     | Shared UI components and global styles                                 |
+| `packages/db`     | PostgreSQL connection, Drizzle setup, and local database configuration |
+| `packages/config` | Shared TypeScript configuration                                        |
 
-### Add more shared components
+Portfolio copy, projects, experience, and writing previews live in `apps/web/src/lib/site.ts`. Page routes live in `apps/web/src/routes`, and images are in `apps/web/public/images`.
 
-Run this from the project root to add more primitives to the shared UI package:
+## Useful commands
 
-```bash
-npx shadcn@latest add accordion dialog popover sheet table -c packages/ui
-```
+| Command                                | Purpose                                      |
+| -------------------------------------- | -------------------------------------------- |
+| `bun run dev`                          | Start the web app in development mode        |
+| `bun run build`                        | Build the workspace                          |
+| `bun run check-types`                  | Check TypeScript across packages             |
+| `bun run db:start` / `bun run db:stop` | Start or stop the local PostgreSQL container |
+| `bun run db:push`                      | Apply the Drizzle schema to the database     |
+| `bun run db:studio`                    | Open Drizzle Studio                          |
+| `bun run check`                        | Run Oxlint and format files with Oxfmt       |
 
-Import shared components like this:
+The app has a Vercel Services configuration in `vercel.json`. Root scripts provide Vercel linking, environment sync, preview deployment, and production deployment commands.
 
-```tsx
-import { Button } from "@reynad-v3/ui/components/button";
-```
+## Content notes
 
-### Add app-specific blocks
-
-If you want to add app-specific blocks instead of shared primitives, run the shadcn CLI from `apps/web`.
-
-## Environment Configuration
-
-Each app owns its environment schema in `.env.schema`. Varlock generates `src/env.ts` during installation; run `bun run env:generate` after changing a schema. Commit schemas, and keep secrets in ignored env files or your deployment platform.
-
-Import the generated `ENV` accessor in application code. Shared database and auth packages receive configuration or initialized clients from the application. See [Varlock's monorepo guide](https://varlock.dev/guides/monorepos/).
-
-Bun's automatic env loading is disabled in `bunfig.toml`; the framework integration or server bootstrap loads Varlock. Node deployments must include Varlock and its dependencies alongside the app schema.
-
-Run standalone Node/Bun tools that use Varlock from the owning app directory so they load that app's schema and env files. `env:generate` only generates TypeScript files; it does not initialize environment values in a subsequent command.
-
-## Deployment
-
-### Vercel Services
-
-- Target: web + server
-- Config: `vercel.json`
-- Link the project first: bun run deploy:setup
-- Local Vercel dev: bun run dev:vercel
-- Sync preview env: bun run env:preview
-- Sync production env: bun run env:production
-- Dry-run check (no upload): bun run deploy:check
-- Preview deploy: bun run deploy
-- Production deploy: bun run deploy:prod
-  Vercel Services share project environment variables, but deploys do not upload local `.env` files automatically. Link the project with `vercel link`, then run the env sync command before your first deploy (otherwise the deployment starts with no env vars), or pass one-off envs with `vercel deploy -e KEY=value`.
-  Pass Vercel CLI flags to the env sync command directly, for example: `bun run env:production --scope your-team`.
-
-For more details, see the guide on [Deploying to Vercel](https://www.better-t-stack.dev/docs/guides/vercel).
-
-## Git Hooks and Formatting
-
-- Run checks: `bun run check`
-
-## Project Structure
-
-```
-reynad-v3/
-├── apps/
-│   └── web/         # Fullstack application (React + TanStack Start)
-├── packages/
-│   ├── ui/          # Shared shadcn/ui components and styles
-│   └── db/          # Database schema & queries
-```
-
-## Available Scripts
-
-- `bun run dev`: Start all applications in development mode
-- `bun run build`: Build all applications
-- `bun run dev:web`: Start only the web application
-- `bun run check-types`: Check TypeScript types across all apps
-- `bun run db:push`: Push schema changes to database
-- `bun run db:generate`: Generate database client/types
-- `bun run db:migrate`: Run database migrations
-- `bun run db:studio`: Open database studio UI
-- `bun run check`: Run Oxlint and Oxfmt
-- `bun run deploy:setup`: Link this repo to a Vercel project (first-time setup)
-- `bun run dev:vercel`: Run the Vercel Services dev environment locally
-- `bun run env:preview`: Sync local env files to the Vercel preview environment
-- `bun run env:production`: Sync local env files to the Vercel production environment
-- `bun run deploy`: Create a Vercel preview deployment
-- `bun run deploy:prod`: Deploy to Vercel production
-- `bun run deploy:check`: Dry-run a deploy to preview framework detection and included files without uploading
+The contact email and résumé URL in `apps/web/src/lib/site.ts` are placeholders marked for replacement. The résumé download points to `/resume.pdf`, which is not currently in `apps/web/public`.
