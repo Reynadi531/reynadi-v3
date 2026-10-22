@@ -29,9 +29,8 @@ export function ProjectsSection() {
           <ProjectCard key={project.title} revealDelay={i * 140} {...project} />
         ))}
       </div>
-      {/* TODO: point at the projects index once that route exists. */}
       <ActionLink
-        href="/#work"
+        href="/work"
         variant="text"
         size="none"
         className="hidden gap-3 text-[15px] lg:inline-flex [&_svg]:size-[18px] [&_svg]:text-brand"

@@ -3,7 +3,7 @@ import type { Experience } from "@/components/site/experience-item";
 import type { Project } from "@/components/site/project-card";
 
 export const navLinks = [
-  { href: "/#work", label: "Work" },
+  { href: "/work", label: "Work" },
   { href: "/#about", label: "About" },
   { href: "/#writing", label: "Writing" },
 ] as const;
@@ -46,6 +46,16 @@ export const projects: Project[] = [
     previewClassName: "bg-[#D9E5DC]",
   },
 ];
+
+/** Shown after the featured pair on the work page. */
+export const spotlightProject: Project = {
+  title: "Relay",
+  description:
+    "A workflow board concept for keeping every request moving from first touch to done.",
+  category: "Product concept / Workflow",
+  image: "/images/project-relay.png",
+  previewClassName: "bg-[#1A1A2E]",
+};
 
 export const capabilities: Capability[] = [
   {

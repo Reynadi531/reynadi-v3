@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
-export type RevealVariant = "up" | "down" | "fade" | "lines";
+export type RevealVariant = "up" | "down" | "fade" | "lines" | "words";
 
 export interface RevealOptions {
   variant?: RevealVariant;

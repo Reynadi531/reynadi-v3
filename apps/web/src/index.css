@@ -72,6 +72,19 @@
     transform: translateY(110%);
   }
 
+  /* Masked copy, word by word. */
+  [data-reveal="words"] [data-word] {
+    transition:
+      transform 0.9s var(--ease-out-expo),
+      opacity 0.9s var(--ease-out-expo);
+    transition-delay: calc(var(--reveal-delay, 0ms) + var(--word-index, 0) * 28ms);
+  }
+
+  [data-reveal="words"]:not([data-revealed]) [data-word] {
+    opacity: 0;
+    transform: translateY(105%);
+  }
+
   /* Media that settles from a slight zoom as its container reveals. */
   [data-reveal-media] {
     transition:

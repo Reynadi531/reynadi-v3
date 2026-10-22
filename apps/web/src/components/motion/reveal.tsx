@@ -1,4 +1,4 @@
-import type { CSSProperties, ReactNode, RefObject } from "react";
+import { Fragment, type CSSProperties, type ReactNode, type RefObject } from "react";
 
 import { useReveal, type RevealOptions } from "./use-reveal";
 
@@ -39,5 +39,34 @@ export function RevealLines({ lines, delay }: RevealLinesProps) {
         </span>
       ))}
     </span>
+  );
+}
+
+interface RevealWordsProps {
+  as?: "p" | "span" | "h2" | "h3";
+  text: string;
+  delay?: number;
+  className?: string;
+}
+
+/** Copy whose words rise out of a mask in a quick left-to-right wave. */
+export function RevealWords({ as = "p", text, delay, className }: RevealWordsProps) {
+  const { ref, ...reveal } = useReveal<HTMLElement>({ variant: "words", delay });
+  const Tag = as as "p";
+  const words = text.split(" ");
+
+  return (
+    <Tag ref={ref as RefObject<HTMLParagraphElement>} className={className} {...reveal}>
+      {words.map((word, i) => (
+        <Fragment key={i}>
+          <span className="-mb-[0.12em] inline-block overflow-hidden pb-[0.12em] align-top">
+            <span data-word className="inline-block" style={{ "--word-index": i } as CSSProperties}>
+              {word}
+            </span>
+          </span>
+          {i < words.length - 1 ? " " : null}
+        </Fragment>
+      ))}
+    </Tag>
   );
 }

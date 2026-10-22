@@ -1,4 +1,5 @@
 import { cn } from "@reynad-v3/ui/lib/utils";
+import { useRouterState } from "@tanstack/react-router";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { useState } from "react";
 
@@ -15,6 +16,8 @@ import { underlineOnHover } from "./site/underline";
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
   const reveal = useReveal<HTMLElement>({ variant: "down" });
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const current = (href: string) => (href === pathname ? "page" : undefined);
 
   return (
     <header
@@ -30,8 +33,9 @@ export function SiteHeader() {
               <a
                 key={href}
                 href={href}
+                aria-current={current(href)}
                 className={cn(
-                  "text-[14px] font-medium text-fg-muted transition-colors hover:text-white",
+                  "text-[14px] font-medium text-fg-muted transition-colors hover:text-white aria-[current=page]:font-bold aria-[current=page]:text-white",
                   underlineOnHover,
                 )}
               >
@@ -75,8 +79,9 @@ export function SiteHeader() {
             <a
               key={href}
               href={href}
+              aria-current={current(href)}
               onClick={() => setOpen(false)}
-              className="py-3 text-[16px] font-medium text-fg-muted transition-colors hover:text-white"
+              className="py-3 text-[16px] font-medium text-fg-muted transition-colors hover:text-white aria-[current=page]:text-white"
             >
               {label}
             </a>
