@@ -1,0 +1,6 @@
+{
+  "extends": "@reynad-v3/config/tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  }
+}

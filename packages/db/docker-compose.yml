@@ -1,0 +1,23 @@
+name: reynad-v3
+
+services:
+  postgres:
+    image: postgres:18
+    container_name: reynad-v3-postgres
+    environment:
+      POSTGRES_DB: reynad-v3
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - reynad-v3_postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  reynad-v3_postgres_data:
