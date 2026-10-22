@@ -4,9 +4,15 @@ import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
 import { createMiddleware } from "@tanstack/react-start";
 import { evlogErrorHandler } from "evlog/nitro/v3";
 
-import Header from "../components/header";
+import { SiteHeader } from "../components/header";
+import { SiteFooter } from "../components/site/site-footer";
+import { SmoothScroll } from "../components/smooth-scroll";
 
 import appCss from "../index.css?url";
+
+// Scroll reveals start hidden; without JS they must stay visible.
+const noScriptRevealCss =
+  "[data-reveal],[data-reveal] [data-line],[data-reveal] [data-reveal-media]{opacity:1!important;transform:none!important}[data-reveal-rule]::before{transform:none!important}";
 
 export interface RouterAppContext {}
 
@@ -25,7 +31,12 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "width=device-width, initial-scale=1",
       },
       {
-        title: "My App",
+        title: "reynadi.id — Software engineer",
+      },
+      {
+        name: "description",
+        content:
+          "Reynadi is a software engineer turning complex ideas into products, systems, and experiences that work.",
       },
     ],
     links: [
@@ -44,11 +55,18 @@ function RootDocument() {
     <html lang="en" className="dark">
       <head>
         <HeadContent />
+        <noscript>
+          <style>{noScriptRevealCss}</style>
+        </noscript>
       </head>
-      <body>
-        <div className="grid h-svh grid-rows-[auto_1fr]">
-          <Header />
-          <Outlet />
+      <body className="bg-canvas-deep leading-[normal] antialiased">
+        <SmoothScroll />
+        <div className="relative flex min-h-svh flex-col">
+          <SiteHeader />
+          <div className="flex-1">
+            <Outlet />
+          </div>
+          <SiteFooter />
         </div>
         <Toaster richColors />
         <TanStackRouterDevtools position="bottom-left" />

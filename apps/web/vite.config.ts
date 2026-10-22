@@ -5,7 +5,7 @@ import viteReact from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
-export default defineConfig({
+export default defineConfig(({ command }) => ({
   server: {
     port: 3001,
   },
@@ -19,8 +19,9 @@ export default defineConfig({
     nitro(),
     viteReact(),
   ],
-  // These deployments run the standalone build artifact.
+  // These deployments run the standalone build artifact. Dev keeps deps external:
+  // inlining CJS packages (e.g. react) breaks Vite's ESM module runner.
   ssr: {
-    noExternal: true,
+    noExternal: command === "build" ? true : undefined,
   },
-});
+}));
