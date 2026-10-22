@@ -6,8 +6,7 @@ import { Eyebrow } from "@/components/site/eyebrow";
 import { Heading } from "@/components/site/heading";
 import { Section } from "@/components/site/section";
 
-// TODO: point at the writing index once that route exists.
-const writingHref = "/#writing";
+const writingHref = "/writing";
 
 export function WritingSection() {
   return (

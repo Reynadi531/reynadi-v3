@@ -143,3 +143,8 @@
   background: var(--color-line-subtle);
   transform-origin: left;
 }
+
+[data-reveal-rule="bottom"]::before {
+  top: auto;
+  bottom: 0;
+}
