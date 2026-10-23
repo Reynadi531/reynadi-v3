@@ -10,6 +10,7 @@
     "env:generate": "varlock codegen"
   },
   "dependencies": {
+    "@marsidev/react-turnstile": "^1.6.3",
     "@reynad-v3/db": "workspace:*",
     "@reynad-v3/ui": "workspace:*",
     "@tailwindcss/vite": "^4.3.3",

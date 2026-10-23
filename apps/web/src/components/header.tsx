@@ -44,7 +44,7 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <ActionLink href="/#contact" size="md" className="hidden lg:inline-flex">
+          <ActionLink href="/contact" size="md" className="hidden lg:inline-flex">
             Let’s talk
             <ArrowUpRight aria-hidden />
           </ActionLink>
@@ -75,7 +75,7 @@ export function SiteHeader() {
         )}
       >
         <Container className="flex flex-col py-2">
-          {[...navLinks, { href: "/#contact", label: "Contact" }].map(({ href, label }) => (
+          {[...navLinks, { href: "/contact", label: "Contact" }].map(({ href, label }) => (
             <a
               key={href}
               href={href}

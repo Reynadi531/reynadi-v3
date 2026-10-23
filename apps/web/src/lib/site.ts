@@ -9,11 +9,17 @@ export const navLinks = [
   { href: "/writing", label: "Writing" },
 ] as const;
 
-export const footerLinks = [...navLinks, { href: "/#contact", label: "Contact" }] as const;
+export const footerLinks = [...navLinks, { href: "/contact", label: "Contact" }] as const;
 
-// TODO: replace with the real contact address and résumé file.
-export const contactHref = "mailto:hello@reynadi.id";
+/** The email address itself lives in `contact-email.ts`, kept out of the markup on purpose. */
+export const contactHref = "/contact";
+// TODO: replace with the real résumé file and LinkedIn profile.
 export const resumeHref = "/resume.pdf";
+
+export const socialLinks = [
+  { href: "https://www.linkedin.com/", label: "LinkedIn" },
+  { href: "https://github.com/Reynadi531", label: "GitHub" },
+] as const;
 
 export const experiences: Experience[] = [
   {

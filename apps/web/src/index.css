@@ -27,6 +27,7 @@
 @theme {
   --animate-nudge: nudge 1.8s ease-in-out infinite;
   --animate-scan: scan 7s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+  --animate-drift: drift 14s ease-in-out infinite;
 
   @keyframes nudge {
     0%,
@@ -35,6 +36,18 @@
     }
     50% {
       transform: translateY(3px);
+    }
+  }
+
+  @keyframes drift {
+    0%,
+    100% {
+      translate: 0 0;
+      scale: 1;
+    }
+    50% {
+      translate: -6% 8%;
+      scale: 1.12;
     }
   }
 
