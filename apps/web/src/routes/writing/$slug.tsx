@@ -4,7 +4,11 @@ import { useEffect, useMemo, useState } from "react";
 import { ArticleInterlude } from "@/components/article/article-interlude";
 import { ArticleMasthead } from "@/components/article/article-masthead";
 import { articleContentId, ArticleOutline } from "@/components/article/article-outline";
-import { ArticleContext, articleComponents } from "@/components/article/article-prose";
+import {
+  ArticleContext,
+  articleComponents,
+  articleContentClassName,
+} from "@/components/article/article-prose";
 import { NextArticle } from "@/components/article/next-article";
 import { ReadingProgress } from "@/components/article/reading-progress";
 import { Container } from "@/components/site/container";
@@ -75,10 +79,7 @@ function PostComponent() {
             <Container className="flex gap-14 pt-[65px] pb-[83px] lg:pt-[104px] lg:pb-[120px] xl:gap-[100px]">
               <ArticleOutline headings={headings} meta={meta} />
 
-              <div
-                id={articleContentId}
-                className="min-w-0 flex-1 lg:max-w-[800px] [&>*+*]:mt-6 [&>[data-section-head]]:mt-[42px] lg:[&>[data-section-head]]:mt-12 [&>[data-section-head]+*]:mt-[15px] lg:[&>[data-section-head]+*]:mt-[17px] [&>blockquote]:my-[42px] lg:[&>blockquote]:my-12 [&>section]:mt-[42px] lg:[&>section]:mt-12 [&>p:first-child]:text-[17px] [&>p:first-child]:text-[#e4e4e4] lg:[&>p:first-child]:text-[20px] lg:[&>p:first-child]:text-white"
-              >
+              <div id={articleContentId} className={articleContentClassName}>
                 <ArticleContext value={context}>
                   <Content components={articleComponents} />
                 </ArticleContext>

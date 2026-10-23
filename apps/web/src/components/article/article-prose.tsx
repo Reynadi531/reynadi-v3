@@ -5,10 +5,10 @@ import { createContext, use, type ComponentProps, type ReactNode, type RefObject
 import { Reveal, RevealLines, RevealWords } from "@/components/motion/reveal";
 import { useReveal } from "@/components/motion/use-reveal";
 import { underlineOnHover } from "@/components/site/underline";
-import type { Post } from "@/lib/posts";
+import type { ArticleHeading } from "../../../mdx/remark-article-meta";
 
 interface ArticleContextValue {
-  headings: Post["headings"];
+  headings: ArticleHeading[];
   sectionLabel: string;
 }
 
@@ -110,6 +110,10 @@ export function Takeaway({
     </section>
   );
 }
+
+/** Spacing rules for the article column, keyed to the direct children the components above emit. */
+export const articleContentClassName =
+  "min-w-0 flex-1 lg:max-w-[800px] [&>*+*]:mt-6 [&>[data-section-head]]:mt-[42px] lg:[&>[data-section-head]]:mt-12 [&>[data-section-head]+*]:mt-[15px] lg:[&>[data-section-head]+*]:mt-[17px] [&>blockquote]:my-[42px] lg:[&>blockquote]:my-12 [&>section]:mt-[42px] lg:[&>section]:mt-12 [&>p:first-child]:text-[17px] [&>p:first-child]:text-[#e4e4e4] lg:[&>p:first-child]:text-[20px] lg:[&>p:first-child]:text-white";
 
 const components: MDXComponents = {
   h2: SectionHeading,

@@ -4,12 +4,18 @@ import { useEffect, useRef, useState } from "react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/site/eyebrow";
-import type { Post } from "@/lib/posts";
+import type { ArticleHeading } from "../../../mdx/remark-article-meta";
 
 export const articleContentId = "article-content";
 
+interface ArticleOutlineProps {
+  headings: ArticleHeading[];
+  meta: { outline?: string[] };
+  label?: string;
+}
+
 /** Sticky reading rail: lists the sections, follows the reader, and fills as they read. */
-export function ArticleOutline({ headings, meta }: Pick<Post, "headings" | "meta">) {
+export function ArticleOutline({ headings, meta, label = "In this article" }: ArticleOutlineProps) {
   const [active, setActive] = useState(-1);
   const fillRef = useRef<HTMLSpanElement>(null);
 
@@ -32,10 +38,10 @@ export function ArticleOutline({ headings, meta }: Pick<Post, "headings" | "meta
   useLenis(update);
 
   return (
-    <aside aria-label="In this article" className="hidden lg:block lg:w-[200px] xl:w-[260px]">
+    <aside aria-label={label} className="hidden lg:block lg:w-[200px] xl:w-[260px]">
       <div className="flex flex-col gap-[26px] lg:sticky lg:top-[132px]">
         <Reveal>
-          <Eyebrow className="text-[11px] tracking-[1.4px]">In this article</Eyebrow>
+          <Eyebrow className="text-[11px] tracking-[1.4px]">{label}</Eyebrow>
         </Reveal>
 
         <ol className="relative flex flex-col gap-[26px] pl-5">

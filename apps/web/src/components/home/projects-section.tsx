@@ -4,7 +4,7 @@ import { ActionLink } from "@/components/site/action-link";
 import { ProjectCard } from "@/components/site/project-card";
 import { Section } from "@/components/site/section";
 import { SectionHeader } from "@/components/site/section-header";
-import { projects } from "@/lib/site";
+import { projects } from "@/lib/projects";
 
 export function ProjectsSection() {
   return (

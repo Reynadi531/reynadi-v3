@@ -4,7 +4,7 @@ import { ExperienceSection } from "@/components/home/experience-section";
 import { ConceptsSection } from "@/components/work/concepts-section";
 import { WorkHeroSection } from "@/components/work/work-hero-section";
 
-export const Route = createFileRoute("/work")({
+export const Route = createFileRoute("/work/")({
   head: () => ({
     meta: [
       { title: "Work — reynadi.id" },

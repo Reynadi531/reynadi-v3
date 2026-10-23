@@ -5,9 +5,9 @@ import { Heading } from "@/components/site/heading";
 import { ProjectCard } from "@/components/site/project-card";
 import { ProjectSpotlight } from "@/components/site/project-spotlight";
 import { Section } from "@/components/site/section";
-import { projects, spotlightProject } from "@/lib/site";
+import { projects, spotlightProjects } from "@/lib/projects";
 
-const conceptCount = projects.length + 1;
+const conceptCount = projects.length + spotlightProjects.length;
 
 export function ConceptsSection() {
   return (
@@ -42,7 +42,9 @@ export function ConceptsSection() {
         ))}
       </div>
 
-      <ProjectSpotlight index={conceptCount} {...spotlightProject} />
+      {spotlightProjects.map((project, i) => (
+        <ProjectSpotlight key={project.title} index={projects.length + i + 1} {...project} />
+      ))}
 
       <CommonThread />
     </Section>

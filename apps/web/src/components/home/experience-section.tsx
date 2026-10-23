@@ -1,7 +1,7 @@
 import { ExperienceItem } from "@/components/site/experience-item";
 import { Section } from "@/components/site/section";
 import { SectionHeader } from "@/components/site/section-header";
-import { experiences } from "@/lib/site";
+import { experiences } from "@/lib/experience";
 
 export function ExperienceSection() {
   return (

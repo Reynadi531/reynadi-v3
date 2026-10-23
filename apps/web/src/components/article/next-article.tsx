@@ -5,17 +5,14 @@ import { Container } from "@/components/site/container";
 import { Eyebrow } from "@/components/site/eyebrow";
 import type { Post } from "@/lib/posts";
 
-interface NextArticleProps {
-  /** The next older article. When there is none, links back to the journal. */
-  next?: Post;
+interface NextBandProps {
+  href: string;
+  label: string;
+  title: string;
 }
 
-/** Closing band that leads to the next article. A brand wash sweeps up on hover. */
-export function NextArticle({ next }: NextArticleProps) {
-  const href = next?.href ?? "/writing";
-  const label = next ? `Read next / ${next.meta.category}` : "Explore more / The journal";
-  const title = next?.meta.title.replace(/\.$/, "") ?? "Back to all writing";
-
+/** Closing band that leads onward. A brand wash sweeps up on hover. */
+export function NextBand({ href, label, title }: NextBandProps) {
   return (
     <a
       href={href}
@@ -50,5 +47,20 @@ export function NextArticle({ next }: NextArticleProps) {
         </Reveal>
       </Container>
     </a>
+  );
+}
+
+interface NextArticleProps {
+  /** The next older article. When there is none, links back to the journal. */
+  next?: Post;
+}
+
+export function NextArticle({ next }: NextArticleProps) {
+  return (
+    <NextBand
+      href={next?.href ?? "/writing"}
+      label={next ? `Read next / ${next.meta.category}` : "Explore more / The journal"}
+      title={next?.meta.title.replace(/\.$/, "") ?? "Back to all writing"}
+    />
   );
 }
