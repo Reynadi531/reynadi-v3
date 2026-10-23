@@ -130,6 +130,16 @@
     transform: scaleX(0);
   }
 
+  /* Quote bars that grow down their edge as the quote reveals. */
+  [data-reveal-bar]::before {
+    transition: transform 1.2s var(--ease-out-expo);
+    transition-delay: calc(var(--reveal-delay, 0ms) + 150ms);
+  }
+
+  [data-reveal-bar]:not([data-revealed])::before {
+    transform: scaleY(0);
+  }
+
   /* Hero artwork entrance. */
   [data-hero-backdrop] {
     animation: hero-backdrop-in 2.2s var(--ease-out-expo) both;
@@ -155,6 +165,20 @@
   height: 1px;
   background: var(--color-line-subtle);
   transform-origin: left;
+}
+
+[data-reveal-bar] {
+  position: relative;
+}
+
+[data-reveal-bar]::before {
+  content: "";
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  width: 3px;
+  background: var(--color-brand);
+  transform-origin: top;
 }
 
 [data-reveal-rule="bottom"]::before {

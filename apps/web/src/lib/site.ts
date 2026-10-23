@@ -1,4 +1,3 @@
-import type { Article } from "@/components/site/article-item";
 import type { Capability } from "@/components/site/capability-item";
 import type { Experience } from "@/components/site/experience-item";
 import type { Project } from "@/components/site/project-card";
@@ -94,37 +93,6 @@ export const approaches: Capability[] = [
     title: "Cloud infrastructure",
     description: "Creating foundations ready for the next stage of growth.",
     mobileDescription: "Foundations ready for the next stage of growth.",
-  },
-];
-
-/** Journal entries, newest first. The first one is featured on the writing page. */
-export const articles: Article[] = [
-  {
-    title: "Building systems that stay boring.",
-    titleLines: ["Building systems", "that stay boring."],
-    excerpt:
-      "Reliability is rarely dramatic. It’s the quiet result of clear boundaries, good defaults, and thoughtful trade-offs.",
-    mobileExcerpt:
-      "Reliability is the quiet result of clear boundaries, good defaults, and thoughtful trade-offs.",
-    category: "Engineering",
-    readTime: "8 min read",
-    views: "1,284",
-  },
-  {
-    title: "From manual steps to dependable automation",
-    excerpt: "How small, repeatable workflows free teams to focus on the work only people can do.",
-    mobileExcerpt: "Making repeatable workflows the team can trust.",
-    category: "Automation",
-    readTime: "6 min read",
-    views: "864",
-  },
-  {
-    title: "Cloud infrastructure without the guesswork",
-    excerpt: "A practical way to make deployment decisions with clarity instead of complexity.",
-    mobileExcerpt: "Making deployment decisions with clarity.",
-    category: "Cloud",
-    readTime: "7 min read",
-    views: "642",
   },
 ];
 

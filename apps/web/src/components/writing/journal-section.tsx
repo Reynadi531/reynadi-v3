@@ -1,15 +1,18 @@
 import { Reveal } from "@/components/motion/reveal";
-import { ArticleItem } from "@/components/site/article-item";
+import { ArticleItem, type Article } from "@/components/site/article-item";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { FeaturedArticle } from "@/components/site/featured-article";
 import { Heading } from "@/components/site/heading";
 import { Section } from "@/components/site/section";
-import { articles } from "@/lib/site";
+interface JournalSectionProps {
+  /** Newest first. The first one is featured. */
+  articles: Article[];
+}
 
-const [featured, ...rest] = articles;
-const postCount = String(articles.length).padStart(2, "0");
+export function JournalSection({ articles }: JournalSectionProps) {
+  const [featured, ...rest] = articles;
+  const postCount = String(articles.length).padStart(2, "0");
 
-export function JournalSection() {
   return (
     <Section
       id="journal"

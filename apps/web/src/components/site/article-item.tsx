@@ -2,6 +2,8 @@ import { ArrowUpRight } from "lucide-react";
 
 import { useReveal } from "@/components/motion/use-reveal";
 
+import { ViewCount } from "./view-count";
+
 export interface Article {
   title: string;
   /** Hand-set line breaks for large display titles. Falls back to `title`. */
@@ -11,7 +13,8 @@ export interface Article {
   mobileExcerpt?: string;
   category: string;
   readTime: string;
-  views: string;
+  /** Omitted when the count is unavailable. */
+  views?: number;
   href?: string;
 }
 
@@ -54,8 +57,7 @@ export function ArticleItem({
             <span className="hidden lg:inline">
               <span className="mx-2">/</span>
               {readTime}
-              <span className="mx-2">/</span>
-              {views} views
+              <ViewCount views={views} />
             </span>
           </p>
           <h3 className="text-[21px]/[1.2] font-extrabold tracking-[-0.4px] text-white lg:text-[24px]/[normal] lg:tracking-[-0.7px]">
@@ -73,8 +75,7 @@ export function ArticleItem({
           </p>
           <p className="text-[11px] font-bold text-fg-faint uppercase lg:hidden">
             {readTime}
-            <span className="mx-2">·</span>
-            {views} views
+            <ViewCount views={views} leading="·" />
           </p>
         </div>
 

@@ -12,7 +12,7 @@ import appCss from "../index.css?url";
 
 // Scroll reveals start hidden; without JS they must stay visible.
 const noScriptRevealCss =
-  "[data-reveal],[data-reveal] [data-line],[data-reveal] [data-word],[data-reveal] [data-reveal-media]{opacity:1!important;transform:none!important}[data-reveal-rule]::before{transform:none!important}";
+  "[data-reveal],[data-reveal] [data-line],[data-reveal] [data-word],[data-reveal] [data-reveal-media]{opacity:1!important;transform:none!important}[data-reveal-rule]::before,[data-reveal-bar]::before{transform:none!important}";
 
 export interface RouterAppContext {}
 

@@ -8,6 +8,7 @@ import { useReveal } from "@/components/motion/use-reveal";
 
 import type { Article } from "./article-item";
 import { Eyebrow } from "./eyebrow";
+import { ViewCount } from "./view-count";
 
 interface FeaturedArticleProps extends Article {
   /** Issue number set large beside the copy on desktop. */
@@ -33,8 +34,7 @@ export function FeaturedArticle({
   const stats = (
     <>
       {readTime}
-      <span className="mx-2">·</span>
-      {views} views
+      <ViewCount views={views} leading="·" />
     </>
   );
 

@@ -3,8 +3,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { JournalSection } from "@/components/writing/journal-section";
 import { TopicsSection } from "@/components/writing/topics-section";
 import { WritingHeroSection } from "@/components/writing/writing-hero-section";
+import { toArticles } from "@/lib/posts";
+import { getViewCounts } from "@/lib/views";
 
-export const Route = createFileRoute("/writing")({
+export const Route = createFileRoute("/writing/")({
+  // The list still renders, without counts, if the database is unreachable.
+  loader: async () => ({ counts: await getViewCounts().catch(() => undefined) }),
   head: () => ({
     meta: [
       { title: "Writing — reynadi.id" },
@@ -19,10 +23,12 @@ export const Route = createFileRoute("/writing")({
 });
 
 function WritingComponent() {
+  const { counts } = Route.useLoaderData();
+
   return (
     <main>
       <WritingHeroSection />
-      <JournalSection />
+      <JournalSection articles={toArticles(counts)} />
       <TopicsSection />
     </main>
   );
