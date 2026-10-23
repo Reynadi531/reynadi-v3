@@ -2,18 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { ContactDetailsSection } from "@/components/contact/contact-details-section";
 import { ContactHeroSection } from "@/components/contact/contact-hero-section";
+import { staticPages, staticPageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({
-    meta: [
-      { title: "Contact — reynadi.id" },
-      {
-        name: "description",
-        content:
-          "Tell me what you’re building, what needs solving, or what you’d like to explore together.",
-      },
-    ],
-  }),
+  head: () => staticPageSeo(staticPages.contact),
   component: ContactComponent,
 });
 

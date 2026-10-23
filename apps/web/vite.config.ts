@@ -9,6 +9,7 @@ import remarkMdxFrontmatter from "remark-mdx-frontmatter";
 import { defineConfig } from "vite";
 
 import { remarkArticleMeta } from "./mdx/remark-article-meta.ts";
+import { ogImages } from "./og/plugin.ts";
 
 export default defineConfig(({ command }) => ({
   server: {
@@ -20,6 +21,7 @@ export default defineConfig(({ command }) => ({
   plugins: [
     varlockVitePlugin({ ssrInjectMode: "resolved-env" }),
     tailwindcss(),
+    ogImages(),
     // Articles live in `content/writing/*.mdx`. Must run before the React plugin.
     {
       enforce: "pre",

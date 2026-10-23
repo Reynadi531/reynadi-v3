@@ -7,7 +7,8 @@
     "serve": "vite preview",
     "dev": "vite dev",
     "check-types": "vite build && tsc --noEmit",
-    "env:generate": "varlock codegen"
+    "env:generate": "varlock codegen",
+    "icons": "tsx og/icons.ts"
   },
   "dependencies": {
     "@marsidev/react-turnstile": "^1.6.3",
@@ -39,6 +40,8 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@fontsource/inter": "^5.3.0",
+    "@resvg/resvg-js": "^2.6.2",
     "@reynad-v3/config": "workspace:*",
     "@tanstack/react-router-devtools": "^1.167.2",
     "@testing-library/dom": "^10.4.2",
@@ -49,8 +52,10 @@
     "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^6.1.2",
     "jsdom": "^30.1.2",
+    "satori": "^0.63.2",
     "typescript": "catalog:",
     "vite": "^8.3.4",
-    "web-vitals": "^6.2.3"
+    "web-vitals": "^6.2.3",
+    "yaml": "^2.9.1"
   }
 }

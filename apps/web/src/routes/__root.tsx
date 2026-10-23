@@ -7,6 +7,7 @@ import { evlogErrorHandler } from "evlog/nitro/v3";
 import { SiteHeader } from "../components/header";
 import { SiteFooter } from "../components/site/site-footer";
 import { SmoothScroll } from "../components/smooth-scroll";
+import { author, siteDescription, siteName } from "../lib/seo";
 
 import appCss from "../index.css?url";
 
@@ -30,19 +31,31 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         name: "viewport",
         content: "width=device-width, initial-scale=1",
       },
-      {
-        title: "reynadi.id — Software engineer",
-      },
-      {
-        name: "description",
-        content:
-          "Reynadi is a software engineer turning complex ideas into products, systems, and experiences that work.",
-      },
+      // Fallbacks; every page sets its own title, description, canonical, and card.
+      { title: `${siteName} — ${author.jobTitle}` },
+      { name: "description", content: siteDescription },
+      { name: "author", content: author.name },
+      { name: "theme-color", content: "#050505" },
+      { name: "color-scheme", content: "dark" },
+      { property: "og:site_name", content: siteName },
+      { property: "og:locale", content: "en_US" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+      // The .ico serves browsers without SVG favicon support; the rest pick the SVG.
+      { rel: "icon", href: "/favicon.ico", sizes: "48x48" },
+      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
+      { rel: "manifest", href: "/site.webmanifest" },
+      {
+        rel: "alternate",
+        type: "application/rss+xml",
+        title: `Writing — ${siteName}`,
+        href: "/rss.xml",
       },
     ],
   }),

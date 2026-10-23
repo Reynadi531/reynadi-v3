@@ -3,18 +3,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { AboutHeroSection } from "@/components/about/about-hero-section";
 import { ApproachSection } from "@/components/about/approach-section";
 import { StorySection } from "@/components/about/story-section";
+import { absoluteUrl, personJsonLd, staticPages, staticPageSeo } from "@/lib/seo";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({
-    meta: [
-      { title: "About — reynadi.id" },
+  head: () =>
+    staticPageSeo(staticPages.about, [
+      personJsonLd,
       {
-        name: "description",
-        content:
-          "Reynadi Andreas Priesley — a software engineer who builds products, automates the hard parts, and makes the cloud work its magic.",
+        "@type": "ProfilePage",
+        url: absoluteUrl(staticPages.about.path),
+        mainEntity: { "@id": personJsonLd["@id"] },
       },
-    ],
-  }),
+    ]),
   component: AboutComponent,
 });
 

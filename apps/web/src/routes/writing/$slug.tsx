@@ -13,6 +13,7 @@ import { NextArticle } from "@/components/article/next-article";
 import { ReadingProgress } from "@/components/article/reading-progress";
 import { Container } from "@/components/site/container";
 import { getNextPost, getPost } from "@/lib/posts";
+import { absoluteUrl, ogImagePath, personJsonLd, seo } from "@/lib/seo";
 import { getViewCounts, recordView } from "@/lib/views";
 
 export const Route = createFileRoute("/writing/$slug")({
@@ -23,20 +24,44 @@ export const Route = createFileRoute("/writing/$slug")({
     // The article still renders, without a count, if the database is unreachable.
     const counts = await getViewCounts().catch(() => undefined);
     return {
+      path: post.href,
       title: post.meta.title,
       description: post.meta.description,
+      date: post.meta.date,
+      category: post.meta.category,
       views: counts && (counts[params.slug] ?? 0),
     };
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.title ?? "Writing"} — reynadi.id` },
-      { name: "description", content: loaderData?.description },
-      { property: "og:title", content: loaderData?.title },
-      { property: "og:description", content: loaderData?.description },
-      { property: "og:type", content: "article" },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const { path, title, description, date, category } = loaderData;
+
+    return seo({
+      path,
+      title,
+      description,
+      type: "article",
+      article: { publishedTime: date, section: category },
+      jsonLd: [
+        {
+          "@type": "BlogPosting",
+          "@id": `${absoluteUrl(path)}#article`,
+          headline: title,
+          description,
+          url: absoluteUrl(path),
+          mainEntityOfPage: absoluteUrl(path),
+          image: absoluteUrl(ogImagePath(path)),
+          datePublished: date,
+          dateModified: date,
+          articleSection: category,
+          inLanguage: "en",
+          author: { "@id": personJsonLd["@id"] },
+          publisher: { "@id": personJsonLd["@id"] },
+        },
+        personJsonLd,
+      ],
+    });
+  },
   component: PostComponent,
 });
 

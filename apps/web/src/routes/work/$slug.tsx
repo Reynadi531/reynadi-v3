@@ -13,22 +13,42 @@ import { ProjectMasthead } from "@/components/project/project-masthead";
 import { ProjectPreview } from "@/components/project/project-preview";
 import { Container } from "@/components/site/container";
 import { getNextProject, getProject } from "@/lib/projects";
+import { absoluteUrl, ogImagePath, personJsonLd, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
     const project = getProject(params.slug);
     if (!project) throw notFound();
 
-    return { title: project.meta.title, description: project.meta.description };
+    const { title, description, category, year, stack } = project.meta;
+    return { path: project.href, title, description, category, year, stack };
   },
-  head: ({ loaderData }) => ({
-    meta: [
-      { title: `${loaderData?.title ?? "Work"} — reynadi.id` },
-      { name: "description", content: loaderData?.description },
-      { property: "og:title", content: loaderData?.title },
-      { property: "og:description", content: loaderData?.description },
-    ],
-  }),
+  head: ({ loaderData }) => {
+    if (!loaderData) return {};
+    const { path, title, description, category, year, stack } = loaderData;
+
+    return seo({
+      path,
+      title,
+      description,
+      jsonLd: [
+        {
+          "@type": "CreativeWork",
+          "@id": `${absoluteUrl(path)}#work`,
+          name: title,
+          description,
+          url: absoluteUrl(path),
+          image: absoluteUrl(ogImagePath(path)),
+          genre: category,
+          dateCreated: year,
+          keywords: stack.join(", "),
+          inLanguage: "en",
+          creator: { "@id": personJsonLd["@id"] },
+        },
+        personJsonLd,
+      ],
+    });
+  },
   component: ProjectComponent,
 });
 
