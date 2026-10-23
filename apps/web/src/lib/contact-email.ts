@@ -3,7 +3,7 @@
  * it ships XOR-masked and in pieces, and is only decoded at the moment it is handed to the
  * clipboard or a mail client.
  */
-const pieces = ["ClIoK18", "TGBsNEB", "EZMgRA"];
+const pieces = ["ClIoK18", "TGBsNEB", "EZOA8="];
 const key = "x7Qk-vault";
 
 function decode() {
