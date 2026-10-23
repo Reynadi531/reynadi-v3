@@ -50,7 +50,10 @@
   "globalEnv": [
     "CI",
     "DATABASE_URL",
+    "FORMSPREE_URL",
     "NODE_ENV",
+    "TURNSTILE_SECRET_KEY",
+    "TURNSTILE_SITE_KEY",
     "VERCEL",
     "VERCEL_ENV",
     "VERCEL_PROJECT_PRODUCTION_URL",
