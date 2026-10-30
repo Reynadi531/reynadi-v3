@@ -72,7 +72,7 @@ export function ProjectSpotlight({
         </div>
         <p className="text-sm/5 text-fg-subtle lg:max-w-[578px] lg:text-base/6">{description}</p>
         <p className="hidden items-center gap-[9px] text-[14px] font-bold text-white lg:flex">
-          Explore concept
+          Explore project
           <ArrowUpRight aria-hidden className={cn("size-[17px] text-brand", arrowHover)} />
         </p>
       </div>

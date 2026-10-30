@@ -7,36 +7,36 @@ import { ProjectSpotlight } from "@/components/site/project-spotlight";
 import { Section } from "@/components/site/section";
 import { projects, spotlightProjects } from "@/lib/projects";
 
-const conceptCount = projects.length + spotlightProjects.length;
+const projectCount = projects.length + spotlightProjects.length;
 
-export function ConceptsSection() {
+export function ProjectArchiveSection() {
   return (
     <Section
-      id="concepts"
+      id="projects"
       tone="base"
       containerClassName="flex flex-col gap-7 pt-[70px] pb-[78px] lg:gap-[43px] lg:pt-[100px] lg:pb-[110px]"
     >
       <div className="flex flex-col gap-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
         <div className="flex flex-col gap-7">
           <Reveal className="lg:hidden">
-            <Eyebrow>03 / Project concepts</Eyebrow>
+            <Eyebrow>03 / Projects</Eyebrow>
           </Reveal>
           <Reveal delay={90}>
             <Heading size="md" className="lg:text-[40px] lg:tracking-[-1.8px]">
-              <span className="lg:hidden">Concepts, explored.</span>
-              <span className="hidden lg:inline">Concept projects</span>
+              <span className="lg:hidden">Built and shipped.</span>
+              <span className="hidden lg:inline">Selected projects</span>
             </Heading>
           </Reveal>
         </div>
         <Reveal delay={180} className="hidden lg:block">
           <Eyebrow className="text-fg-subtle lg:tracking-[1.2px]">
-            03 / Concepts<span className="mx-4">·</span>001 —{" "}
-            {String(conceptCount).padStart(3, "0")}
+            03 / Projects<span className="mx-4">·</span>001 —{" "}
+            {String(projectCount).padStart(3, "0")}
           </Eyebrow>
         </Reveal>
       </div>
 
-      <div className="flex flex-col gap-7 lg:flex-row lg:items-start">
+      <div className="grid gap-7 lg:grid-cols-2 lg:gap-y-[54px]">
         {projects.map((project, i) => (
           <ProjectCard key={project.title} revealDelay={i * 140} {...project} />
         ))}
@@ -51,7 +51,7 @@ export function ConceptsSection() {
   );
 }
 
-/** Desktop-only closing statement tying the concepts together. */
+/** Desktop-only closing statement tying the projects together. */
 function CommonThread() {
   const reveal = useReveal<HTMLDivElement>({ variant: "fade" });
 
@@ -65,7 +65,7 @@ function CommonThread() {
       <RevealWords
         delay={150}
         className="max-w-[780px] text-[24px]/[1.3] font-bold tracking-[-0.6px] text-white"
-        text="Three product explorations across analytics, knowledge, and workflow — designed to make complex work feel clearer."
+        text="Six builds across mapping, finance, commerce, firmware, AI, and open data — each made to turn messy real-world work into something dependable."
       />
     </div>
   );

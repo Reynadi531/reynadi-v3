@@ -1,0 +1,36 @@
+---
+title: Yuki Agent
+description: A Gemini-powered assistant for Computer Engineering students, served by FastAPI and deployed to Kubernetes with full CI/CD.
+category: AI agent / Cloud
+image: /images/project-yuki-agent.png
+previewClassName: bg-[#1C1C1C]
+layout: card
+order: 4
+role: Backend & infrastructure
+year: "2026"
+status: Course project
+stack: ["Python", "FastAPI", "Google ADK", "Gemini", "Kubernetes"]
+outline: ["The brief", "The agent", "Shipping it"]
+---
+
+Yuki Shiina is a quiet, robot-loving Computer Engineering student, and the persona of an AI assistant built for a cloud computing course. The interesting part is not the chat; it is everything that keeps it running.
+
+## The brief
+
+Build an AI service and run it the way production services run: containerised, health-checked, isolated, and delivered by a pipeline rather than by hand.
+
+## The agent
+
+A FastAPI app exposes `POST /ask`, which routes each question through a Google ADK agent on Gemini 2.5 Flash with session handling. CORS is locked to the frontend's origin, and `/health` and `/ready` back the Kubernetes probes.
+
+## Shipping it
+
+- A multi-stage Alpine Docker image, built and pushed to GHCR by GitHub Actions, with a Jenkinsfile as an alternative pipeline.
+- A Kubernetes deployment with a security context and probes, a ClusterIP service, and an NGINX ingress with TLS.
+- A network policy to isolate the pod and a pod disruption budget to keep it available during maintenance.
+
+<Takeaway title="Where it stands">
+
+Delivered as a course project, with a deployment guide for any cluster. Source: [backend](https://github.com/Reynadi531/tubes-cc-be) and [frontend](https://github.com/Reynadi531/tubes-cc-fe).
+
+</Takeaway>

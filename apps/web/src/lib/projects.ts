@@ -10,7 +10,7 @@ const frontmatterSchema = z.object({
   title: z.string(),
   /** The card blurb, also the deck under the title on the detail page. */
   description: z.string(),
-  /** e.g. "Product concept / Analytics". */
+  /** e.g. "GIS / Environmental monitoring". */
   category: z.string(),
   /** Preview image path under `public/`. */
   image: z.string(),

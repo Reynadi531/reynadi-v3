@@ -1,0 +1,45 @@
+---
+title: API COVID-19 Indonesia
+description: A free public API that reshaped Indonesia's official COVID-19 data into clean, CORS-friendly JSON and CSV for developers during the pandemic.
+category: Public API / Open data
+image: /images/project-api-covid19.png
+previewClassName: bg-[#1C1C1C]
+layout: spotlight
+order: 6
+role: Backend engineering
+year: "2020 — 2021"
+status: Retired
+stack: ["JavaScript", "Node.js", "Express", "Vercel"]
+outline: ["The problem", "Version one", "Version two", "Looking back"]
+---
+
+In 2020, everyone wanted to build a COVID-19 dashboard, and every one of them needed the same data. This API made Indonesia's numbers easy to use, and it became my most-starred project.
+
+## The problem
+
+Official figures were published, but not in a shape developers could drop into an app. Formats changed, browsers blocked cross-origin requests, and each project ended up writing its own scraper.
+
+## Version one
+
+The first API scraped the source, ran an updater, and kept the results in a database. It worked, but it was only as stable as the page it scraped.
+
+## Version two
+
+Version two dropped scraping and read the official `data.covid19.go.id` feeds directly, then reshaped them into something readable.
+
+- National totals, daily history, and per-province data, with a `name` query for a single province.
+- Every dataset also available as CSV.
+- CORS enabled, with in-memory caching, compression, and cache headers.
+- One-click deploys to Vercel and Heroku.
+
+A sibling project, the [vaccination API](https://github.com/Reynadi531/vaksincovid19-api), did the same for vaccine rollout figures.
+
+## Looking back
+
+The API earned 51 stars and served people building their own trackers. The source feeds have since gone quiet, so the API is retired, but it taught me that the most useful thing an API can be is boring and predictable.
+
+<Takeaway title="Where it stands">
+
+Retired along with its data source. Source on [GitHub](https://github.com/Reynadi531/api-covid19-indonesia-v2).
+
+</Takeaway>

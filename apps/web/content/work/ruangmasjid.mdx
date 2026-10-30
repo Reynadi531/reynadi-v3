@@ -1,0 +1,42 @@
+---
+title: ruangmasjid
+description: A finance workspace for mosque administrators and treasurers to record income and expenses, reconcile the cash ledger, and publish reports.
+category: Web app / Finance
+image: /images/project-ruangmasjid.png
+previewClassName: bg-[#0B3B82]
+layout: card
+order: 2
+role: Product & full-stack engineering
+year: "2026"
+status: In development
+stack: ["TypeScript", "TanStack Start", "Drizzle", "PostgreSQL", "Better-Auth"]
+outline: ["The problem", "Requirements first", "What it does", "Trust by design"]
+---
+
+Mosque finances often live in a spreadsheet, a notebook, and someone's memory. ruangmasjid gives administrators and treasurers one workspace for every rupiah that comes in and goes out.
+
+## The problem
+
+Separate records make balances hard to trust. When a report is questioned, there is no easy way to show where a number came from, who changed it, or what supported it.
+
+## Requirements first
+
+The project started with a product requirements document, not code. It defines the users, the journeys, and testable success criteria, such as every report row reconciling to the closing balance: opening balance + income − expenses = closing balance.
+
+## What it does
+
+- Record income (`Uang Masuk`) and expenses (`Uang Keluar`) with categories, amounts in IDR, and optional proof.
+- Import transactions from CSV and export reports.
+- A dashboard with period totals, a cashflow chart, and recent transactions.
+- A cash report (`Laporan Kas`) with a dated ledger and running balance.
+- User management, mosque settings, and an opt-in public report for transparency.
+
+## Trust by design
+
+Changes to financial data are recorded in a change log that shows who did what and when, with filters and export. Roles separate who can record transactions from who can manage users and settings.
+
+<Takeaway title="Where it stands">
+
+ruangmasjid is in active development with a staging deployment. Source on [GitHub](https://github.com/Reynadi531/finance-alkautsar).
+
+</Takeaway>

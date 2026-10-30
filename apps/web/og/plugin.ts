@@ -92,7 +92,9 @@ export function ogImages(): Plugin {
 
   const readPublic = async (src: string) => {
     const data = await readFile(path.join(publicDir(), src));
-    return `data:image/${path.extname(src).slice(1)};base64,${data.toString("base64")}`;
+    const ext = path.extname(src).slice(1).toLowerCase();
+    // `.jpg` has no MIME type of its own; satori rejects `image/jpg`.
+    return `data:image/${ext === "jpg" ? "jpeg" : ext};base64,${data.toString("base64")}`;
   };
 
   async function renderEntry(collection: string, file: string) {

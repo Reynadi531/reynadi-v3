@@ -1,0 +1,48 @@
+---
+title: Golden Eye
+description: An illegal gold mining tracker that puts tens of thousands of detected mine sites across Jambi on one live, satellite-backed map.
+category: GIS / Environmental monitoring
+image: /images/project-golden-eye.jpg
+previewClassName: bg-[#1F3A24]
+layout: card
+order: 1
+role: Full-stack & GIS engineering
+year: "2025 — 2026"
+status: Live
+stack: ["TypeScript", "React", "MapLibre GL", "PostGIS", "Martin", "Hono"]
+outline: ["The problem", "First version", "Rebuilt for scale", "Operations"]
+---
+
+Illegal gold mining (PETI) scars rivers and forest across Jambi, including the edges of Kerinci Seblat National Park. Golden Eye turns yearly detection data into a single map that authorities and the public can actually read.
+
+## The problem
+
+Detections arrive as point and polygon layers per year. Viewed one file at a time, nobody can see the pattern: how mining follows the rivers, how it spreads from 2022 to 2025, and how close it gets to protected land. The map had to show everything at once, because the overview is the whole point.
+
+## First version
+
+The first Golden Eye was a lean React client with a Hono API on Cloudflare Workers. The API proxied the source dataset, paginated it, found the centre of each site, and reverse geocoded it into a readable place name, so every detection came with a location people recognise.
+
+## Rebuilt for scale
+
+Once the dataset grew past 44,000 polygons, loading features into the browser stopped working. The rebuild moved geometry into PostgreSQL and let the database do the heavy lifting.
+
+- **PostGIS** stores every feature as `geometry(Geometry, 4326)` with a GiST index.
+- **A tile function** builds Mapbox Vector Tiles with `ST_AsMVT`, simplifying shapes 10x at zoom 0–7, 3x at zoom 8–12, and not at all from zoom 13.
+- **Martin** serves those tiles, chosen over pg_tileserv for function sources and speed.
+- **An Nginx file cache** sits in front of the tile server instead of Redis.
+- **MapLibre GL** renders every layer with WebGL, toggled per year from a layer panel, over satellite or street basemaps.
+
+Viewport loading and clustering were both ruled out: they hide exactly the sprawl the map exists to show.
+
+> “If the overview hides the sprawl, the map has failed.”
+
+## Operations
+
+Admins sign in with Better-Auth and upload new shapefiles straight from the browser, so a new year of detections becomes a new layer without touching the database by hand. The whole stack runs as Docker services behind Caddy, built by GitHub Actions.
+
+<Takeaway title="Where it stands">
+
+Golden Eye is live at [goldeneye.my.id](https://goldeneye.my.id), with nine layers covering Jambi from 2022 to 2025 plus Kerinci Seblat. Source: [golden-eye](https://github.com/Reynadi531/golden-eye) and [goldeneye-ng](https://github.com/Reynadi531/goldeneye-ng).
+
+</Takeaway>

@@ -1,0 +1,43 @@
+---
+title: IMU-FD
+description: ESP32 firmware for fall detection research that calibrates an IMU and streams every reading over ESP-NOW to a ground station.
+category: Embedded / Research
+image: /images/project-imu-fd.png
+previewClassName: bg-[#1C1C1C]
+layout: spotlight
+order: 5
+role: Firmware & tooling
+year: "2025 — 2026"
+status: Research prototype
+stack: ["C++", "ESP32", "PlatformIO", "ESP-NOW", "Python"]
+outline: ["The problem", "Calibration first", "The firmware", "Operating it"]
+---
+
+Fall detection research lives or dies on clean motion data. IMU-FD is the instrument behind it: firmware that reads an IMU, corrects it, and gets every sample off the device without dropping it.
+
+## The problem
+
+Raw IMU readings drift and carry sensor bias, and a lost packet can hide the exact moment of a fall. The device needed to be calibrated, observable, and able to keep a backup of everything it sent.
+
+## Calibration first
+
+The work started with a Python calibration tool for the GY-85 sensor: a desktop GUI that connects over serial and walks through accelerometer and gyroscope calibration, backed by a Jupyter notebook for analysis.
+
+## The firmware
+
+The current firmware runs on an ESP32 with an MPU6500.
+
+- Streams CSV samples over ESP-NOW to a receiver sketch acting as the ground station.
+- Logs the same payloads to microSD under `/IMU_DATA/`.
+- Runs calibration on the device and persists it, Wi-Fi credentials, and the ESP-NOW peer to EEPROM.
+- Shows live status on an SSD1306 OLED.
+
+## Operating it
+
+The device joins Wi-Fi, with Bluetooth Serial as a fallback for provisioning, and exposes an HTTP control API on port 80 documented as an OpenAPI spec. Researchers can start and stop streams, recalibrate, manage SD logging, and set the peer without reflashing.
+
+<Takeaway title="Where it stands">
+
+A working research prototype with maintainer docs and an API reference. Source: [firmware](https://github.com/Reynadi531/frimware-imu-fd) and [calibration tools](https://github.com/Reynadi531/imu-cal).
+
+</Takeaway>

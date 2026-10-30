@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
 import { ExperienceSection } from "@/components/home/experience-section";
-import { ConceptsSection } from "@/components/work/concepts-section";
+import { ProjectArchiveSection } from "@/components/work/project-archive-section";
 import { WorkHeroSection } from "@/components/work/work-hero-section";
 import { staticPages, staticPageSeo } from "@/lib/seo";
 
@@ -15,7 +15,7 @@ function WorkComponent() {
     <main>
       <WorkHeroSection />
       <ExperienceSection />
-      <ConceptsSection />
+      <ProjectArchiveSection />
     </main>
   );
 }

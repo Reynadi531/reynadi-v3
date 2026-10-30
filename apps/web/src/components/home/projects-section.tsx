@@ -14,17 +14,12 @@ export function ProjectsSection() {
       containerClassName="flex flex-col gap-7 pt-[70px] pb-[78px] lg:gap-[54px] lg:pt-28 lg:pb-[122px]"
     >
       <SectionHeader
-        eyebrow={
-          <>
-            03 / <span className="lg:hidden">Project concepts</span>
-            <span className="hidden lg:inline">Selected projects</span>
-          </>
-        }
-        title="Concepts, explored."
+        eyebrow="03 / Selected projects"
+        title="Built and shipped."
         titleSize="md"
-        aside="Exploratory product concepts — imagined interfaces for useful, dependable digital tools."
+        aside="Real products and research builds — from illegal-mining maps and mosque ledgers to ESP32 firmware."
       />
-      <div className="flex flex-col gap-7 lg:flex-row lg:items-start">
+      <div className="grid gap-7 lg:grid-cols-2 lg:gap-y-[54px]">
         {projects.map((project, i) => (
           <ProjectCard key={project.title} revealDelay={i * 140} {...project} />
         ))}

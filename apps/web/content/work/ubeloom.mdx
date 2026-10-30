@@ -1,0 +1,42 @@
+---
+title: ubeloom
+description: A batch preorder storefront for sweet potato lumpia and drinks, with payment review, fulfilment, and a Telegram bot for the team.
+category: Commerce / Preorder
+image: /images/project-ubeloom.png
+previewClassName: bg-[#7A2560]
+layout: card
+order: 3
+role: Full-stack engineering
+year: "2026"
+status: Live
+stack: ["TypeScript", "TanStack Start", "Drizzle", "PostgreSQL", "S3", "Telegram Bot API"]
+outline: ["The problem", "The storefront", "Behind the counter", "Keeping the team in the loop"]
+---
+
+ubeloom sells lumpia ubi and fresh drinks in preorder batches. The site handles everything from the first order to pickup on campus, so a small team can run it without a spreadsheet of chat screenshots.
+
+## The problem
+
+Preorders over chat do not scale. Payments get lost in threads, proofs are screenshots of screenshots, and nobody knows which orders are ready for pickup.
+
+## The storefront
+
+Customers browse the menu, order while a batch is open, and choose pickup at Kampus Telkom, Bandung, or delivery at checkout. Each batch has a clear open and close time, so the kitchen knows exactly what to make.
+
+## Behind the counter
+
+The admin dashboard covers products, batches, vouchers, invoices, payment review, and fulfilment.
+
+- Payment proofs are checked by their file bytes, not the browser's claimed type, then stored in a private S3 bucket.
+- Orders move through payment and fulfilment states that the team can filter and update.
+- A prize draw gives one entry per paid invoice for customers who opt in.
+
+## Keeping the team in the loop
+
+A separate Bun service runs a Telegram bot that notifies admins about pending payments and links them straight to the dashboard. Structured request logs make issues easy to trace.
+
+<Takeaway title="Where it stands">
+
+ubeloom is live at [ubeloom.my.id](https://www.ubeloom.my.id/). Source on [GitHub](https://github.com/Reynadi531/ubeloom-web).
+
+</Takeaway>
