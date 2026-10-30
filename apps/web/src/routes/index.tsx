@@ -6,6 +6,7 @@ import { ExperienceSection } from "@/components/home/experience-section";
 import { HeroSection } from "@/components/home/hero-section";
 import { ProjectsSection } from "@/components/home/projects-section";
 import { WritingSection } from "@/components/home/writing-section";
+import { heroBackdropImage } from "@/components/motion/hero-backdrop";
 import {
   personJsonLd,
   siteDescription,
@@ -16,8 +17,8 @@ import {
 } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({
-  head: () =>
-    staticPageSeo(staticPages.home, [
+  head: () => {
+    const head = staticPageSeo(staticPages.home, [
       {
         "@type": "WebSite",
         "@id": `${siteUrl}/#website`,
@@ -28,7 +29,24 @@ export const Route = createFileRoute("/")({
         author: { "@id": personJsonLd["@id"] },
       },
       personJsonLd,
-    ]),
+    ]);
+
+    return {
+      ...head,
+      links: [
+        ...head.links,
+        // The desktop backdrop is the largest paint; only desktop shows it.
+        {
+          rel: "preload",
+          as: "image",
+          href: heroBackdropImage,
+          type: "image/webp",
+          media: "(min-width: 1024px)",
+          fetchPriority: "high",
+        },
+      ],
+    };
+  },
   component: HomeComponent,
 });
 

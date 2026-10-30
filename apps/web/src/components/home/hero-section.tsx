@@ -83,6 +83,7 @@ export function HeroSection() {
             data-reveal-media
             src="/images/reynadi-ascii-portrait.png"
             alt="ASCII portrait of Reynadi"
+            fetchPriority="high"
             className="size-full object-cover"
           />
         </Reveal>

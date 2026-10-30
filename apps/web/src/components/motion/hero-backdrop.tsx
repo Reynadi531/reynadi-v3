@@ -1,5 +1,8 @@
 import { Parallax } from "./parallax";
 
+/** The home page preloads it: as a CSS background the browser would find it late. */
+export const heroBackdropImage = "/images/reynadi-ascii-hero.webp";
+
 /** Desktop hero artwork: fades in on load and drifts slower than the page on scroll. */
 export function HeroBackdrop() {
   return (
@@ -10,7 +13,8 @@ export function HeroBackdrop() {
       <Parallax speed={0.3} className="absolute inset-0">
         <div
           data-hero-backdrop
-          className="size-full bg-[url(/images/reynadi-ascii-hero-v2.png)] bg-cover bg-center bg-no-repeat"
+          className="size-full bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackdropImage})` }}
         />
       </Parallax>
     </div>

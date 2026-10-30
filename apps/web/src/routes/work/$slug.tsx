@@ -13,7 +13,14 @@ import { ProjectMasthead } from "@/components/project/project-masthead";
 import { ProjectPreview } from "@/components/project/project-preview";
 import { Container } from "@/components/site/container";
 import { getNextProject, getProject } from "@/lib/projects";
-import { absoluteUrl, ogImagePath, personJsonLd, seo } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  ogImagePath,
+  personJsonLd,
+  seo,
+  staticPages,
+} from "@/lib/seo";
 
 export const Route = createFileRoute("/work/$slug")({
   loader: ({ params }) => {
@@ -45,6 +52,10 @@ export const Route = createFileRoute("/work/$slug")({
           inLanguage: "en",
           creator: { "@id": personJsonLd["@id"] },
         },
+        breadcrumbJsonLd(path, [
+          { name: staticPages.work.title, path: staticPages.work.path },
+          { name: title, path },
+        ]),
         personJsonLd,
       ],
     });

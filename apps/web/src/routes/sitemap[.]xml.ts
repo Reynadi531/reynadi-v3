@@ -9,8 +9,15 @@ interface SitemapEntry {
   lastmod?: string;
 }
 
+// Pages that list the writing change whenever an article is published.
+const latestPost = posts[0]?.meta.date;
+const listsWriting = new Set<string>([staticPages.home.path, staticPages.writing.path]);
+
 const entries: SitemapEntry[] = [
-  ...Object.values(staticPages).map(({ path }) => ({ path })),
+  ...Object.values(staticPages).map(({ path }) => ({
+    path,
+    lastmod: listsWriting.has(path) ? latestPost : undefined,
+  })),
   ...posts.map(({ href, meta }) => ({ path: href, lastmod: meta.date })),
   ...projectEntries.map(({ href }) => ({ path: href })),
 ];

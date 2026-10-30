@@ -4,7 +4,7 @@
 export const siteUrl = "https://reynadi.id";
 export const siteName = "reynadi.id";
 export const siteDescription =
-  "Reynadi is a software engineer turning complex ideas into products, systems, and experiences that work.";
+  "Reynadi Andreas Priesley is a software engineer in Indonesia turning complex ideas into products, systems, and experiences that work.";
 
 export const author = {
   name: "Reynadi Andreas Priesley",
@@ -78,9 +78,32 @@ export const personJsonLd = {
   name: author.name,
   jobTitle: author.jobTitle,
   url: siteUrl,
+  alternateName: ["Reynadi", "Rey"],
+  description: siteDescription,
   image: absoluteUrl("/images/reynadi-ascii-portrait.png"),
+  knowsAbout: [
+    "Software engineering",
+    "Product engineering",
+    "Automation",
+    "DevOps",
+    "Cloud infrastructure",
+  ],
   sameAs: author.sameAs,
 };
+
+/** Schema.org trail from the home page to `path`, one entry per level after home. */
+export function breadcrumbJsonLd(path: string, trail: { name: string; path: string }[]) {
+  return {
+    "@type": "BreadcrumbList",
+    "@id": `${absoluteUrl(path)}#breadcrumb`,
+    itemListElement: [{ name: "Home", path: "/" }, ...trail].map((crumb, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: crumb.name,
+      item: absoluteUrl(crumb.path),
+    })),
+  };
+}
 
 interface SeoInput {
   path: string;
@@ -109,8 +132,8 @@ export function seo({
 }: SeoInput) {
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(image);
-  // The home page leads with the site name; every other page leads with its own.
-  const fullTitle = path === "/" ? `${siteName} — ${title}` : `${title} — ${siteName}`;
+  // The home page leads with the author's name, so searches for it match; every other page leads with its own.
+  const fullTitle = path === "/" ? `${author.name} — ${title}` : `${title} — ${siteName}`;
 
   return {
     meta: [
@@ -121,6 +144,7 @@ export function seo({
       { property: "og:title", content: fullTitle },
       { property: "og:description", content: description },
       { property: "og:image", content: imageUrl },
+      { property: "og:image:type", content: "image/png" },
       { property: "og:image:width", content: String(ogImageSize.width) },
       { property: "og:image:height", content: String(ogImageSize.height) },
       { property: "og:image:alt", content: imageAlt },

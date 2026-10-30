@@ -13,7 +13,14 @@ import { NextArticle } from "@/components/article/next-article";
 import { ReadingProgress } from "@/components/article/reading-progress";
 import { Container } from "@/components/site/container";
 import { getNextPost, getPost } from "@/lib/posts";
-import { absoluteUrl, ogImagePath, personJsonLd, seo } from "@/lib/seo";
+import {
+  absoluteUrl,
+  breadcrumbJsonLd,
+  ogImagePath,
+  personJsonLd,
+  seo,
+  staticPages,
+} from "@/lib/seo";
 import { getViewCounts, recordView } from "@/lib/views";
 
 export const Route = createFileRoute("/writing/$slug")({
@@ -58,6 +65,10 @@ export const Route = createFileRoute("/writing/$slug")({
           author: { "@id": personJsonLd["@id"] },
           publisher: { "@id": personJsonLd["@id"] },
         },
+        breadcrumbJsonLd(path, [
+          { name: staticPages.writing.title, path: staticPages.writing.path },
+          { name: title, path },
+        ]),
         personJsonLd,
       ],
     });

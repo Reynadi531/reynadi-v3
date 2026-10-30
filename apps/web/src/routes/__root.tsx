@@ -32,9 +32,11 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         content: "width=device-width, initial-scale=1",
       },
       // Fallbacks; every page sets its own title, description, canonical, and card.
-      { title: `${siteName} — ${author.jobTitle}` },
+      { title: `${author.name} — ${author.jobTitle}` },
       { name: "description", content: siteDescription },
       { name: "author", content: author.name },
+      // Lets search results show the social cards and article snippets at full size.
+      { name: "robots", content: "max-image-preview:large, max-snippet:-1" },
       { name: "theme-color", content: "#050505" },
       { name: "color-scheme", content: "dark" },
       { property: "og:site_name", content: siteName },
