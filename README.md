@@ -65,4 +65,4 @@ The app has a Vercel Services configuration in `vercel.json`. Root scripts provi
 
 ## Content notes
 
-The contact email and résumé URL in `apps/web/src/lib/site.ts` are placeholders marked for replacement. The résumé download points to `/resume.pdf`, which is not currently in `apps/web/public`.
+The contact email and LinkedIn URL in `apps/web/src/lib/site.ts` are placeholders marked for replacement. The résumé download goes through `/resume`, which redirects to `main.pdf` in the [Reynadi531/resume](https://github.com/Reynadi531/resume) repository.

@@ -10,8 +10,10 @@ export const footerLinks = [...navLinks, { href: "/contact", label: "Contact" }]
 
 /** The email address itself lives in `contact-email.ts`, kept out of the markup on purpose. */
 export const contactHref = "/contact";
-// TODO: replace with the real résumé file and LinkedIn profile.
-export const resumeHref = "/resume.pdf";
+/** `/resume` redirects here; served raw so the browser downloads the latest build from the résumé repo. */
+export const resumeSourceUrl = "https://raw.githubusercontent.com/Reynadi531/resume/main/main.pdf";
+export const resumeHref = "/resume";
+// TODO: replace with the real LinkedIn profile.
 
 export const socialLinks = [
   { href: "https://www.linkedin.com/", label: "LinkedIn" },
