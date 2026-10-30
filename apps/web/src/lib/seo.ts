@@ -9,8 +9,7 @@ export const siteDescription =
 export const author = {
   name: "Reynadi Andreas Priesley",
   jobTitle: "Software engineer",
-  // TODO: add the LinkedIn profile once `socialLinks` points at it.
-  sameAs: ["https://github.com/Reynadi531"],
+  sameAs: ["https://github.com/Reynadi531", "https://linkedin.com/in/reynadiap"],
 };
 
 export const ogImageSize = { width: 1200, height: 630 } as const;

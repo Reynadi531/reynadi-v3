@@ -13,10 +13,9 @@ export const contactHref = "/contact";
 /** `/resume` redirects here; served raw so the browser downloads the latest build from the résumé repo. */
 export const resumeSourceUrl = "https://raw.githubusercontent.com/Reynadi531/resume/main/main.pdf";
 export const resumeHref = "/resume";
-// TODO: replace with the real LinkedIn profile.
 
 export const socialLinks = [
-  { href: "https://www.linkedin.com/", label: "LinkedIn" },
+  { href: "https://linkedin.com/in/reynadiap", label: "LinkedIn" },
   { href: "https://github.com/Reynadi531", label: "GitHub" },
 ] as const;
 
