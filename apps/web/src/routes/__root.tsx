@@ -7,6 +7,7 @@ import { evlogErrorHandler } from "evlog/nitro/v3";
 import { SiteHeader } from "../components/header";
 import { SiteFooter } from "../components/site/site-footer";
 import { SmoothScroll } from "../components/smooth-scroll";
+import { umamiDomains, umamiScriptSrc, umamiWebsiteId } from "../lib/analytics";
 import { author, siteDescription, siteName } from "../lib/seo";
 
 import appCss from "../index.css?url";
@@ -58,6 +59,14 @@ export const Route = createRootRouteWithContext<RouterAppContext>()({
         type: "application/rss+xml",
         title: `Writing — ${siteName}`,
         href: "/rss.xml",
+      },
+    ],
+    scripts: [
+      {
+        src: umamiScriptSrc,
+        defer: true,
+        "data-website-id": umamiWebsiteId,
+        "data-domains": umamiDomains,
       },
     ],
   }),

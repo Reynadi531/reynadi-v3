@@ -5,6 +5,7 @@ import { ActionLink } from "@/components/site/action-link";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { Heading } from "@/components/site/heading";
 import { Section } from "@/components/site/section";
+import { trackClick } from "@/lib/analytics";
 
 const writingHref = "/writing";
 
@@ -45,13 +46,18 @@ export function WritingSection() {
       <Reveal delay={270}>
         <ActionLink
           href={writingHref}
+          {...trackClick("explore-writing-click", { location: "home" })}
           variant="text"
           size="none"
           className="text-[14px] text-brand lg:hidden"
         >
           Explore writing ↗
         </ActionLink>
-        <ActionLink href={writingHref} className="hidden gap-[31px] lg:inline-flex">
+        <ActionLink
+          href={writingHref}
+          className="hidden gap-[31px] lg:inline-flex"
+          {...trackClick("explore-writing-click", { location: "home" })}
+        >
           Explore writing
           <ArrowUpRight aria-hidden />
         </ActionLink>

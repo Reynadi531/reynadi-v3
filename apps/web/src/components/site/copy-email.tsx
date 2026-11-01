@@ -4,6 +4,7 @@ import { Check, Copy } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
 
+import { track } from "@/lib/analytics";
 import { readContactEmail } from "@/lib/contact-email";
 
 /** Copies the email address to the clipboard. The address itself is never shown on the page. */
@@ -17,11 +18,13 @@ export function CopyEmailButton({ className }: { className?: string }) {
     try {
       await navigator.clipboard.writeText(readContactEmail());
     } catch {
+      track("copy-email", { success: false });
       toast.error("Couldn’t copy the email", {
         description: "Your browser blocked clipboard access.",
       });
       return;
     }
+    track("copy-email", { success: true });
     setCopied(true);
     toast.success("Email copied to clipboard");
     clearTimeout(timer.current);

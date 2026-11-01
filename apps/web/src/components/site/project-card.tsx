@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { RefObject } from "react";
 
 import { useReveal } from "@/components/motion/use-reveal";
+import { trackClick } from "@/lib/analytics";
 
 export interface Project {
   title: string;
@@ -17,6 +18,8 @@ export interface Project {
 interface ProjectCardProps extends Project {
   /** Stagger delay for the scroll reveal, in ms. */
   revealDelay?: number;
+  /** Where the card sits, attached to its `project-click` event. */
+  trackLocation?: string;
   className?: string;
 }
 
@@ -28,6 +31,7 @@ export function ProjectCard({
   previewClassName,
   href,
   revealDelay,
+  trackLocation = "unknown",
   className,
 }: ProjectCardProps) {
   const { ref, ...reveal } = useReveal<HTMLElement>({ delay: revealDelay });
@@ -36,7 +40,9 @@ export function ProjectCard({
   return (
     <Root
       ref={ref as RefObject<HTMLElement>}
-      {...(href ? { href } : {})}
+      {...(href
+        ? { href, ...trackClick("project-click", { project: title, location: trackLocation }) }
+        : {})}
       className={cn("group flex w-full flex-col gap-3.5 lg:flex-1 lg:gap-0", className)}
       {...reveal}
     >

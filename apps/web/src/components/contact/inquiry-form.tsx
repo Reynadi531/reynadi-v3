@@ -9,6 +9,7 @@ import { Eyebrow } from "@/components/site/eyebrow";
 import { FormField } from "@/components/site/form-field";
 import { Heading } from "@/components/site/heading";
 import { TurnstileField } from "@/components/site/turnstile-field";
+import { track } from "@/lib/analytics";
 import { submitInquiry } from "@/lib/inquiry";
 
 /**
@@ -36,9 +37,11 @@ export function InquiryForm() {
           turnstileToken: token,
         },
       });
+      track("inquiry-submit", { success: true });
       toast.success("Inquiry sent", { description: "Thanks! I’ll get back to you soon." });
       form.reset();
     } catch {
+      track("inquiry-submit", { success: false });
       toast.error("Couldn’t send your inquiry", {
         description: "Something went wrong on the way. Please try again in a moment.",
       });

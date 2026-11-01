@@ -4,6 +4,7 @@ import { CapabilityItem } from "@/components/site/capability-item";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { Heading } from "@/components/site/heading";
 import { Section } from "@/components/site/section";
+import { trackClick } from "@/lib/analytics";
 import { capabilities } from "@/lib/site";
 
 export function AboutSection() {
@@ -41,7 +42,13 @@ export function AboutSection() {
       </div>
 
       <Reveal delay={340} className="lg:hidden">
-        <ActionLink href="/about" variant="text" size="none" className="text-[14px] text-brand">
+        <ActionLink
+          href="/about"
+          variant="text"
+          size="none"
+          className="text-[14px] text-brand"
+          {...trackClick("more-about-click", { location: "home" })}
+        >
           More about me ↗
         </ActionLink>
       </Reveal>

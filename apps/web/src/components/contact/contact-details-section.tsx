@@ -4,6 +4,7 @@ import { CopyEmailButton } from "@/components/site/copy-email";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { Heading } from "@/components/site/heading";
 import { underlineOnHover } from "@/components/site/underline";
+import { trackClick } from "@/lib/analytics";
 import { socialLinks } from "@/lib/site";
 import { cn } from "@reynad-v3/ui/lib/utils";
 
@@ -54,6 +55,7 @@ function DirectLine() {
                   href={href}
                   target="_blank"
                   rel="noreferrer"
+                  {...trackClick("social-click", { network: label, location: "contact" })}
                   className={cn(
                     "group inline-flex text-[15px] font-semibold text-white transition-colors hover:text-brand lg:text-[16px]",
                     underlineOnHover,

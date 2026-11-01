@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { useReveal } from "@/components/motion/use-reveal";
+import { trackClick } from "@/lib/analytics";
 
 import { ViewCount } from "./view-count";
 
@@ -44,7 +45,9 @@ export function ArticleItem({
   return (
     <li ref={ref} data-reveal-rule className={className} {...reveal}>
       <Body
-        {...(href ? { href } : {})}
+        {...(href
+          ? { href, ...trackClick("article-click", { article: title, location: "list" }) }
+          : {})}
         className="group flex flex-col gap-[11px] pt-[25px] lg:flex-row lg:items-center lg:gap-[34px] lg:py-[31px]"
       >
         <span className="hidden text-[12px] font-bold text-brand tabular-nums lg:block">

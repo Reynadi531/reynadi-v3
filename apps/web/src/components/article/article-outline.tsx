@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import { Reveal } from "@/components/motion/reveal";
 import { Eyebrow } from "@/components/site/eyebrow";
+import { trackClick } from "@/lib/analytics";
 import type { ArticleHeading } from "../../../mdx/remark-article-meta";
 
 export const articleContentId = "article-content";
@@ -58,6 +59,7 @@ export function ArticleOutline({ headings, meta, label = "In this article" }: Ar
                 <a
                   href={`#${id}`}
                   aria-current={i === active ? "location" : undefined}
+                  {...trackClick("outline-click", { section: id })}
                   className="group flex gap-3 text-fg-muted transition-colors hover:text-white aria-[current=location]:text-white"
                 >
                   <span

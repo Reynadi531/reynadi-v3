@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/components/motion/reveal";
 import { Container } from "@/components/site/container";
 import { Eyebrow } from "@/components/site/eyebrow";
+import { trackClick } from "@/lib/analytics";
 import type { Post } from "@/lib/posts";
 
 interface NextBandProps {
@@ -16,6 +17,7 @@ export function NextBand({ href, label, title }: NextBandProps) {
   return (
     <a
       href={href}
+      {...trackClick("next-band-click", { to: href })}
       className="group relative block w-full overflow-hidden bg-canvas-raised outline-none focus-visible:ring-2 focus-visible:ring-brand/60 focus-visible:ring-inset"
     >
       <span

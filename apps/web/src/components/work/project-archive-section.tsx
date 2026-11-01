@@ -38,12 +38,22 @@ export function ProjectArchiveSection() {
 
       <div className="grid gap-7 lg:grid-cols-2 lg:gap-y-[54px]">
         {projects.map((project, i) => (
-          <ProjectCard key={project.title} revealDelay={i * 140} {...project} />
+          <ProjectCard
+            key={project.title}
+            revealDelay={i * 140}
+            trackLocation="work-archive"
+            {...project}
+          />
         ))}
       </div>
 
       {spotlightProjects.map((project, i) => (
-        <ProjectSpotlight key={project.title} index={projects.length + i + 1} {...project} />
+        <ProjectSpotlight
+          key={project.title}
+          index={projects.length + i + 1}
+          trackLocation="work-archive"
+          {...project}
+        />
       ))}
 
       <CommonThread />

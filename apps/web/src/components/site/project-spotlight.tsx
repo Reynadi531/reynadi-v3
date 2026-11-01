@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import type { RefObject } from "react";
 
 import { useReveal } from "@/components/motion/use-reveal";
+import { trackClick } from "@/lib/analytics";
 
 import type { Project } from "./project-card";
 
@@ -11,6 +12,8 @@ interface ProjectSpotlightProps extends Project {
   index: number;
   /** Stagger delay for the scroll reveal, in ms. */
   revealDelay?: number;
+  /** Where the feature sits, attached to its `project-click` event. */
+  trackLocation?: string;
   className?: string;
 }
 
@@ -27,6 +30,7 @@ export function ProjectSpotlight({
   previewClassName,
   href,
   revealDelay,
+  trackLocation = "unknown",
   className,
 }: ProjectSpotlightProps) {
   const { ref, ...reveal } = useReveal<HTMLElement>({ delay: revealDelay });
@@ -37,7 +41,9 @@ export function ProjectSpotlight({
   return (
     <Root
       ref={ref as RefObject<HTMLElement>}
-      {...(href ? { href } : {})}
+      {...(href
+        ? { href, ...trackClick("project-click", { project: title, location: trackLocation }) }
+        : {})}
       className={cn(
         "group flex w-full flex-col gap-3.5 lg:flex-row lg:items-center lg:gap-0 lg:overflow-hidden lg:rounded-xl lg:bg-canvas-raised",
         className,

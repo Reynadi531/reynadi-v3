@@ -5,6 +5,7 @@ import { Reveal, RevealLines, RevealWords } from "@/components/motion/reveal";
 import { Container } from "@/components/site/container";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { underlineOnHover } from "@/components/site/underline";
+import { trackClick } from "@/lib/analytics";
 import type { ProjectMeta } from "@/lib/projects";
 
 interface ProjectMastheadProps {
@@ -28,6 +29,7 @@ export function ProjectMasthead({ meta }: ProjectMastheadProps) {
           <Reveal delay={60}>
             <a
               href="/work"
+              {...trackClick("back-link-click", { to: "/work" })}
               className="group inline-flex items-center gap-[9px] text-[13px] font-semibold text-fg-subtle transition-colors hover:text-white lg:gap-[11px] lg:text-[14px]"
             >
               <ArrowLeft

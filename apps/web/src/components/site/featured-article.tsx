@@ -5,6 +5,7 @@ import type { RefObject } from "react";
 import { Parallax } from "@/components/motion/parallax";
 import { RevealLines } from "@/components/motion/reveal";
 import { useReveal } from "@/components/motion/use-reveal";
+import { trackClick } from "@/lib/analytics";
 
 import type { Article } from "./article-item";
 import { Eyebrow } from "./eyebrow";
@@ -41,7 +42,9 @@ export function FeaturedArticle({
   return (
     <Root
       ref={ref as RefObject<HTMLElement>}
-      {...(href ? { href } : {})}
+      {...(href
+        ? { href, ...trackClick("article-click", { article: title, location: "featured" }) }
+        : {})}
       className={cn(
         "group relative flex overflow-hidden rounded-[10px] bg-canvas-deep px-[25px] py-[30px] lg:items-center lg:justify-between lg:gap-[46px] lg:rounded-[14px] lg:px-16 lg:py-[62px]",
         className,

@@ -5,6 +5,7 @@ import { Reveal, RevealLines, RevealWords } from "@/components/motion/reveal";
 import { Container } from "@/components/site/container";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { underlineOnHover } from "@/components/site/underline";
+import { trackClick } from "@/lib/analytics";
 import { formatViews } from "@/components/site/view-count";
 import { formatPostDate, type Post } from "@/lib/posts";
 
@@ -30,6 +31,7 @@ export function ArticleMasthead({ meta, views }: ArticleMastheadProps) {
           <Reveal delay={60}>
             <a
               href="/writing"
+              {...trackClick("back-link-click", { to: "/writing" })}
               className="group inline-flex items-center gap-[9px] text-[13px] font-semibold text-fg-subtle transition-colors hover:text-white lg:gap-[11px] lg:text-[14px]"
             >
               <ArrowLeft

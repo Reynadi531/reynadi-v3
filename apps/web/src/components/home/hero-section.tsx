@@ -5,6 +5,7 @@ import { Reveal, RevealLines } from "@/components/motion/reveal";
 import { ActionLink } from "@/components/site/action-link";
 import { Container } from "@/components/site/container";
 import { Heading } from "@/components/site/heading";
+import { trackClick } from "@/lib/analytics";
 import { contactHref, resumeHref } from "@/lib/site";
 
 export function HeroSection() {
@@ -49,7 +50,11 @@ export function HeroSection() {
             delay={580}
             className="flex flex-wrap items-start gap-2.5 lg:items-center lg:gap-[26px]"
           >
-            <ActionLink href="/#work" size="hero">
+            <ActionLink
+              href="/#work"
+              size="hero"
+              {...trackClick("explore-work-click", { location: "hero" })}
+            >
               <span className="lg:hidden">Explore work</span>
               <span className="hidden lg:inline">Explore my work</span>
               <ArrowUpRight aria-hidden />
@@ -57,6 +62,7 @@ export function HeroSection() {
             <ActionLink
               href={resumeHref}
               download
+              {...trackClick("resume-download", { location: "hero" })}
               variant="outline"
               size="hero"
               className="lg:flex-row-reverse lg:gap-[13px] lg:px-[21px]"
@@ -66,6 +72,7 @@ export function HeroSection() {
             </ActionLink>
             <ActionLink
               href={contactHref}
+              {...trackClick("contact-cta-click", { location: "hero" })}
               variant="text"
               size="none"
               className="hidden text-[15px] font-semibold lg:inline-flex"
@@ -96,7 +103,11 @@ export function HeroSection() {
           className="flex h-[100px] items-center justify-between border-t border-line text-[12px] font-bold tracking-[1.3px] text-fg-faint"
         >
           <p>01 / 04 PORTFOLIO</p>
-          <a href="/#experience" className="transition-colors hover:text-white">
+          <a
+            href="/#experience"
+            {...trackClick("scroll-cue-click")}
+            className="transition-colors hover:text-white"
+          >
             SCROLL TO EXPLORE <span className="inline-block motion-safe:animate-nudge">↓</span>
           </a>
         </Reveal>

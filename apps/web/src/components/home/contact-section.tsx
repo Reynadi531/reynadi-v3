@@ -5,6 +5,7 @@ import { ActionLink } from "@/components/site/action-link";
 import { Eyebrow } from "@/components/site/eyebrow";
 import { Heading } from "@/components/site/heading";
 import { Section } from "@/components/site/section";
+import { trackClick } from "@/lib/analytics";
 import { contactHref } from "@/lib/site";
 
 export function ContactSection() {
@@ -25,7 +26,11 @@ export function ContactSection() {
           <RevealLines delay={90} lines={["Let’s build", "something great."]} />
         </Heading>
         <Reveal delay={360}>
-          <ActionLink href={contactHref} size="cta">
+          <ActionLink
+            href={contactHref}
+            size="cta"
+            {...trackClick("contact-cta-click", { location: "home-contact" })}
+          >
             Contact me
             <ArrowUpRight aria-hidden />
           </ActionLink>

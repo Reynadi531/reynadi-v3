@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import { useReveal } from "@/components/motion/use-reveal";
 
+import { track, trackClick } from "@/lib/analytics";
 import { navLinks } from "@/lib/site";
 
 import { ActionLink } from "./site/action-link";
@@ -34,6 +35,7 @@ export function SiteHeader() {
                 key={href}
                 href={href}
                 aria-current={current(href)}
+                {...trackClick("nav-click", { label, location: "header" })}
                 className={cn(
                   "text-[14px] font-medium text-fg-muted transition-colors hover:text-white aria-[current=page]:font-bold aria-[current=page]:text-white",
                   underlineOnHover,
@@ -44,7 +46,12 @@ export function SiteHeader() {
             ))}
           </nav>
 
-          <ActionLink href="/contact" size="md" className="hidden lg:inline-flex">
+          <ActionLink
+            href="/contact"
+            size="md"
+            className="hidden lg:inline-flex"
+            {...trackClick("contact-cta-click", { location: "header" })}
+          >
             Let’s talk
             <ArrowUpRight aria-hidden />
           </ActionLink>
@@ -53,7 +60,10 @@ export function SiteHeader() {
             type="button"
             aria-expanded={open}
             aria-controls="mobile-menu"
-            onClick={() => setOpen((value) => !value)}
+            onClick={() => {
+              track("mobile-menu-toggle", { open: !open });
+              setOpen(!open);
+            }}
             className="flex items-center gap-2 text-[11px] font-bold tracking-[1px] text-fg-subtle lg:hidden"
           >
             MENU
@@ -81,6 +91,7 @@ export function SiteHeader() {
               href={href}
               aria-current={current(href)}
               onClick={() => setOpen(false)}
+              {...trackClick("nav-click", { label, location: "mobile-menu" })}
               className="py-3 text-[16px] font-medium text-fg-muted transition-colors hover:text-white aria-[current=page]:text-white"
             >
               {label}

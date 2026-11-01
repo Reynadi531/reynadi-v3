@@ -1,6 +1,7 @@
 import { cn } from "@reynad-v3/ui/lib/utils";
 
 import { footerLinks } from "@/lib/site";
+import { trackClick } from "@/lib/analytics";
 
 import { Container } from "./container";
 import { underlineOnHover } from "./underline";
@@ -20,6 +21,7 @@ export function SiteFooter() {
               <a
                 key={href}
                 href={href}
+                {...trackClick("nav-click", { label, location: "footer" })}
                 className={cn(
                   "text-[13px] font-medium text-fg-subtle transition-colors hover:text-white",
                   underlineOnHover,

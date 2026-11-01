@@ -5,6 +5,7 @@ import { createContext, use, type ComponentProps, type ReactNode, type RefObject
 import { Reveal, RevealLines, RevealWords } from "@/components/motion/reveal";
 import { useReveal } from "@/components/motion/use-reveal";
 import { underlineOnHover } from "@/components/site/underline";
+import { isExternalHref, trackClick } from "@/lib/analytics";
 import type { ArticleHeading } from "../../../mdx/remark-article-meta";
 
 interface ArticleContextValue {
@@ -133,6 +134,7 @@ const components: MDXComponents = {
   a: ({ href, children }) => (
     <a
       href={href}
+      {...(isExternalHref(href) ? trackClick("outbound-link-click", { url: href }) : {})}
       className={cn(
         "font-semibold text-white transition-colors hover:text-brand",
         underlineOnHover,
